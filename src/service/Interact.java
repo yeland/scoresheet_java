@@ -16,11 +16,19 @@ public class Interact {
                     break;
                 case 2:
                     printScoresheet();
+                    break;
+                case 3:
+                    return;
+                default:
+                    break;
             }
+            Print.mainScreen();
+            command = Integer.parseInt(Input.getInput());
         }
     }
 
-    private Scoresheet printScoresheet() {
+    private void printScoresheet() {
+        Print print = new Print();
         Print.inputStudentId();
         String read = Input.getInput();
         GetScoresheet getScoresheet = new GetScoresheet();
@@ -29,7 +37,7 @@ public class Interact {
             read = Input.getInput();
         }
         Scoresheet scoresheet = getScoresheet.getSheet(read);
-        Print.printScoresheet(scoresheet);
+        print.printScoresheet(scoresheet);
     }
 
     private void addStudent() {

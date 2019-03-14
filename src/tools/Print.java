@@ -28,14 +28,41 @@ public class Print {
         System.out.print("请按正确的格式输入要打印的学生的学号（格式： 学号, 学号,...），按回车提交：");
     }
 
-    public static void printScoresheet(Scoresheet scoresheet) {
+    public void printScoresheet(Scoresheet scoresheet) {
+        List<String> courses = generateCourses(scoresheet.getStudents());
+        System.out.println("成绩单\n" + "姓名|" + String.join("|", courses) + "|平均分|总分"
+                + "\n========================\n" + generateStudent(scoresheet.getStudents(), courses)
+                + "\n========================\n" + "全班总分平均数：" + scoresheet.getSumAverage()
+                + "\n全班总分中位数："+ scoresheet.getSumMedian()
+        );
 
     }
 
     private List<String> generateCourses(List<Student> students) {
-          List<Course> courses = students.stream()
-                  .flatMap(student -> student.getCourses().stream())
-                  .collect(Collectors.toList());
-          return courses.stream().map(Course::getName).distinct().collect(Collectors.toList());
+        List<Course> courses = students.stream()
+                .flatMap(student -> student.getCourses().stream())
+                .collect(Collectors.toList());
+        return courses.stream().map(Course::getName).distinct().collect(Collectors.toList());
+    }
+
+    private String generateStudent(List<Student> students, List<String> coursesList) {
+        List<String> printStudents = students.stream().map(student ->
+                student.getName() + "|" + generateScore(student, coursesList) + "|" + student.getAverage() + "|" + student.getSum())
+                .collect(Collectors.toList());
+        return String.join("\n", printStudents);
+    }
+
+    private String generateScore(Student student, List<String> coursesList) {
+        List<Course> courses = student.getCourses();
+        List<String> names = courses.stream().map(Course::getName).collect(Collectors.toList());
+        List<Integer> score = courses.stream().map(Course::getScore).collect(Collectors.toList());
+        List<String> printScore = coursesList.stream().map(ele -> {
+            int index = names.indexOf(ele);
+            if (index != -1) {
+                return score.get(index) + "";
+            }
+            return "0";
+        }).collect(Collectors.toList());
+        return String.join("|", printScore);
     }
 }
