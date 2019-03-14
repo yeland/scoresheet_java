@@ -1,5 +1,12 @@
 package tools;
 
+import model.Course;
+import model.Scoresheet;
+import model.Student;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Print {
     public static void mainScreen() {
         System.out.println("1. 添加学生\n2. 生成成绩单\n3. 退出\n请输入你的选择（1~3）: ");
@@ -21,4 +28,14 @@ public class Print {
         System.out.print("请按正确的格式输入要打印的学生的学号（格式： 学号, 学号,...），按回车提交：");
     }
 
+    public static void printScoresheet(Scoresheet scoresheet) {
+
+    }
+
+    private List<List<String>> generateCourses(List<Student> students) {
+          List<Course> courses = students.stream()
+                  .flatMap(student -> student.getCourses().stream())
+                  .collect(Collectors.toList());
+          return courses.stream().map(Course::getName).distinct().collect(Collectors.toList());
+    }
 }

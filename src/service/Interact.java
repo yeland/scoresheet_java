@@ -1,25 +1,38 @@
 package service;
 
-import model.Student;
+import model.Scoresheet;
+import tools.FileOperation;
 import tools.Input;
 import tools.Print;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Interact {
     public void chooseTodo() {
-        List<Student> students = new ArrayList<>();
         Print.mainScreen();
         int command = Integer.parseInt(Input.getInput());
         while (true) {
             switch (command) {
-                case 1: addStudent(students);
+                case 1:
+                    addStudent();
+                    break;
+                case 2:
+                    printScoresheet();
             }
         }
     }
 
-    private void addStudent(List<Student> students) {
+    private Scoresheet printScoresheet() {
+        Print.inputStudentId();
+        String read = Input.getInput();
+        GetScoresheet getScoresheet = new GetScoresheet();
+        while (!getScoresheet.checkId(read)) {
+            Print.inputCorrectId();
+            read = Input.getInput();
+        }
+        Scoresheet scoresheet = getScoresheet.getSheet(read);
+        Print.printScoresheet(scoresheet);
+    }
+
+    private void addStudent() {
         Print.inputStudent();
         GetStudent getStudent = new GetStudent();
         String read = Input.getInput();
@@ -27,8 +40,7 @@ public class Interact {
             Print.inputCorrectStudent();
             read = Input.getInput();
         }
-        Student student = getStudent.formatStudent(read);
-        students.add(student);
-        //写入文件
+        FileOperation fileOperation = new FileOperation();
+        fileOperation.writeToFile(read + "\n");
     }
 }

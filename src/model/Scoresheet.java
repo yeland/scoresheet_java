@@ -11,6 +11,8 @@ public class Scoresheet {
 
     public Scoresheet(List<Student> students) {
         this.students = students;
+        this.setSumAverage();
+        this.setSumMedian();
     }
 
     public List<Student> getStudents() {
@@ -25,7 +27,7 @@ public class Scoresheet {
         return this.sumAverage;
     }
 
-    public void setSumAverage(double sumAverage) {
+    public void setSumAverage() {
         List<Integer> sums = students.stream().map(Student::getSum).collect(Collectors.toList());
         this.sumAverage = sums.stream().collect(Collectors.averagingDouble(Integer::valueOf));
     }
@@ -34,7 +36,7 @@ public class Scoresheet {
         return this.sumMedian;
     }
 
-    public void setSumMedian(double sumMedian) {
+    public void setSumMedian() {
         List<Integer> sums = students.stream().map(Student::getSum).collect(Collectors.toList());
         Collections.sort(sums);
         int left = (int) Math.floor((sums.size()-1)/2.0);
