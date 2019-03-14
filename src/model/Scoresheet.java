@@ -1,18 +1,16 @@
 package model;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Scoresheet {
     private List<Student> students;
     private double sumAverage;
     private double sumMedian;
 
-    public Scoresheet(List<Student> students) {
+    public Scoresheet(List<Student> students, double sumAverage, double sumMedian) {
         this.students = students;
-        this.setSumAverage();
-        this.setSumMedian();
+        this.sumAverage = sumAverage;
+        this.sumMedian = sumMedian;
     }
 
     public List<Student> getStudents() {
@@ -27,20 +25,15 @@ public class Scoresheet {
         return this.sumAverage;
     }
 
-    public void setSumAverage() {
-        List<Integer> sums = students.stream().map(Student::getSum).collect(Collectors.toList());
-        this.sumAverage = sums.stream().collect(Collectors.averagingDouble(Integer::valueOf));
+    public void setSumAverage(double sumAverage) {
+        this.sumAverage = sumAverage;
     }
 
     public double getSumMedian() {
         return this.sumMedian;
     }
 
-    public void setSumMedian() {
-        List<Integer> sums = students.stream().map(Student::getSum).collect(Collectors.toList());
-        Collections.sort(sums);
-        int left = (int) Math.floor((sums.size()-1)/2.0);
-        int right = (int) Math.ceil((sums.size()-1)/2.0);
-        this.sumMedian = (sums.get(left)+sums.get(right))/2.0;
+    public void setSumMedian(double sumMedian) {
+        this.sumMedian = sumMedian;
     }
 }

@@ -1,6 +1,7 @@
 package service;
 
 import model.Scoresheet;
+import model.Student;
 import tools.FileOperation;
 import tools.Input;
 import tools.Print;
@@ -50,5 +51,7 @@ public class Interact {
         }
         FileOperation fileOperation = new FileOperation();
         fileOperation.writeToFile(read + "\n");
+        Student student = getStudent.formatStudent(read);
+        Print.addSuccess(student);
     }
 }

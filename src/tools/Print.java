@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Print {
     public static void mainScreen() {
-        System.out.println("1. 添加学生\n2. 生成成绩单\n3. 退出\n请输入你的选择（1~3）: ");
+        System.out.print("1. 添加学生\n2. 生成成绩单\n3. 退出\n请输入你的选择（1~3）: ");
     }
 
     public static void inputStudent() {
@@ -18,6 +18,10 @@ public class Print {
 
     public static void inputCorrectStudent() {
         System.out.print("请按正确的格式输入（格式：姓名, 学号, 学科: 成绩, ...）：");
+    }
+
+    public static void addSuccess(Student student) {
+        System.out.println("学生"+student.getName()+"的成绩被添加");
     }
 
     public static void inputStudentId() {
