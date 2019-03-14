@@ -14,9 +14,10 @@ public class Main {
             Print.inputCorrectStudent();
             read = Input.getInput();
         }*/
+        FileOperation fileOperation = new FileOperation();
+        fileOperation.fileInit();
         Interact interact = new Interact();
         interact.chooseTodo();
-        FileOperation fileOperation = new FileOperation();
         List<Student> students = fileOperation.readFromFile();
         System.out.println(students.get(0).getAverage());
     }
