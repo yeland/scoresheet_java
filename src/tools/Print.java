@@ -32,7 +32,7 @@ public class Print {
 
     }
 
-    private List<List<String>> generateCourses(List<Student> students) {
+    private List<String> generateCourses(List<Student> students) {
           List<Course> courses = students.stream()
                   .flatMap(student -> student.getCourses().stream())
                   .collect(Collectors.toList());
