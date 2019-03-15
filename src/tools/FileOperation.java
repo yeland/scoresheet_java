@@ -8,10 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileOperation {
-    public static final String path = "./data/";
-    public static final String fileName = "students.txt";
+    private String path = "./data/";
+    private String fileName = "students.txt";
 
     private String filePath = path + fileName;
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 
     public void fileInit() {
         File fileDir = new File(path);
