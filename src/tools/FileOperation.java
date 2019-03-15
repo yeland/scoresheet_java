@@ -19,8 +19,6 @@ public class FileOperation {
         File file = new File(this.filePath);
         try {
             file.createNewFile();
-            FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write("");
         } catch (IOException e) {
             e.printStackTrace();
         }
